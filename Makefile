@@ -2,7 +2,7 @@ HERE = $(shell pwd)
 VENV = $(HERE)/venv
 BIN = $(VENV)/bin
 PYTHON = $(BIN)/python
-
+VIRTUALENV = virtualenv
 INSTALL = $(BIN)/pip install --no-deps
 
 .PHONY: all test docs build_extras
@@ -10,7 +10,7 @@ INSTALL = $(BIN)/pip install --no-deps
 all: build
 
 $(PYTHON):
-	virtualenv $(VENV)
+	$(VIRTUALENV) $(VENV)
 
 build: $(PYTHON)
 	$(PYTHON) setup.py develop
