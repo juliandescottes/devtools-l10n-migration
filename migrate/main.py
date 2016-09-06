@@ -71,8 +71,7 @@ def main():
             print 'Can not find previous dtd file'
             exit()
 
-        # XXX get_value_dtd is undefined ?
-        translation = get_value_dtd(dtd_path, beforeName)
+        translation = get_value_from_dtd(dtd_path, beforeName)
 
         if ':' not in after:
             continue
