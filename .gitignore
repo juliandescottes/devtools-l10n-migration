@@ -1,6 +1,7 @@
 # Temporary files.
 *.coverage
 *.DS_Store
+*.pyc
 
 # Build folders.
 .tox
