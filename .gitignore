@@ -1,0 +1,8 @@
+# Temporary files.
+*.coverage
+*.DS_Store
+
+# Build folders.
+.tox
+l10n_migration.egg-info
+venv
