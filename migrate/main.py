@@ -4,22 +4,23 @@ import os
 import parser
 
 
+# License header to use when creating new properties files.
 LICENSE = ('# This Source Code Form is subject to the terms of the '
            'Mozilla Public\n# License, v. 2.0. If a copy of the MPL '
            'was not distributed with this\n# file, You can obtain '
            'one at http://mozilla.org/MPL/2.0/.\n')
 
 
-DTD_PARSER = parser.getParser('.dtd')
-
-
-def get_translation_from_dtd(path, name):
-    DTD_PARSER.readFile(path)
-    entities, map = DTD_PARSER.parse()
-    entity = entities[map[name]]
+# Extract the value of an entity in a dtd file.
+def get_translation_from_dtd(dtd_path, entity_name):
+    dtd_parser = parser.getParser('.dtd')
+    dtd_parser.readFile(dtd_path)
+    entities, map = dtd_parser.parse()
+    entity = entities[map[entity_name]]
     return entity.val.encode('utf-8')
 
 
+# Create a new properties file at the provided path.
 def create_properties_file(path):
     print 'creating new *.properties file: %s' % path
     prop_file = open(path, 'w+')
@@ -27,6 +28,7 @@ def create_properties_file(path):
     prop_file.close()
 
 
+# Apply the migration instructions in the provided configuration file
 def migrate_conf(conf_path, l10n_path):
     f = open(conf_path, 'r')
     lines = f.readlines()
@@ -61,7 +63,7 @@ def migrate_conf(conf_path, l10n_path):
 
 
 def main():
-    # Read arguments
+    # Read command line arguments.
     arg_parser = argparse.ArgumentParser(
             description='Migrate devtools localized strings.')
     arg_parser.add_argument('path', type=str, help='path to l10n repository')
@@ -76,6 +78,7 @@ def main():
         exit()
     print 'l10n path: [%s] is valid' % devtools_l10n_path
 
+    # Retrieve configuration files to apply.
     if os.path.isdir(args.config):
         conf_files = glob.glob(args.config + '*')
     elif os.path.isfile(args.config):
@@ -84,6 +87,7 @@ def main():
         print 'config path: [%s] is invalid' % args.config
         exit()
 
+    # Perform migration for each configuration file.
     for conf_file in conf_files:
         print 'performing migration for [%s]' % conf_file
         migrate_conf(conf_file, devtools_l10n_path)
