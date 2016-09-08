@@ -3,7 +3,6 @@ import glob
 import logging
 import os
 import parser
-import re
 import urllib2
 
 # Configure logging format and level
@@ -29,12 +28,12 @@ DEV_BASE_URL = ('https://hg.mozilla.org/'
                 'devtools/client/locales/en-US/')
 
 
-# Cache to store properties files retrieved over the network
+# Cache to store properties files retrieved over the network.
 central_properties = {}
 
 
 # Retrieve the current version of the provided properties file filename from
-# devtools/client on mozilla central
+# devtools/client on mozilla central.
 def get_central_prop_file(prop_filename):
     if prop_filename in central_properties:
         return central_properties[prop_filename]
@@ -44,14 +43,14 @@ def get_central_prop_file(prop_filename):
 
     try:
         central_properties[prop_filename] = urllib2.urlopen(url).readlines()
-    except IOError, e:
+    except:
         logging.error('failed to load properties file on central : {%s}' % url)
         central_properties[prop_filename] = []
 
     return central_properties[prop_filename]
 
 
-
+# Retrieve the current en-US localization notes for the provided prop_name.
 def get_localization_note(prop_name, prop_filename):
     prop_file = get_central_prop_file(prop_filename)
     comment_buffer = []
@@ -60,19 +59,20 @@ def get_localization_note(prop_name, prop_filename):
         line = line.strip('\n').strip('\r')
 
         if line.startswith('#'):
-            # Comment line, add to the current comment buffer
+            # Comment line, add to the current comment buffer.
             comment_buffer.append(line)
         elif line.startswith(prop_name + '='):
             # Property found, the current comment buffer is the localization
-            # note
+            # note.
             return '\n'.join(comment_buffer)
         else:
-            # No match, not a comment, reinitialize the comment buffer
+            # No match, not a comment, reinitialize the comment buffer.
             comment_buffer = []
 
     logging.warning('localization notes could not be found for: {%s}'
-        % prop_name)
+                    % prop_name)
     return '# LOCALIZATION NOTE (%s)\n' % prop_name
+
 
 # Extract the value of an entity in a dtd file.
 def get_translation_from_dtd(dtd_path, entity_name):
@@ -109,12 +109,12 @@ def migrate_string(dtd_path, prop_path, dtd_name, prop_name):
     # Skip the string if it already exists in the destination file.
     prop_file_content = open(prop_path, 'r').read()
     if prop_line in prop_file_content:
-        logging.warning('property already migrated, skipping: {%s}' % prop_name)
+        logging.warning('string already migrated, skipping: {%s}' % prop_name)
         return
     # Skip the string and log an error if an existing entry is found, but with
-    # a different value
+    # a different value.
     if ('\n' + prop_name + '=') in prop_file_content:
-        logging.error('existing entry found, skipping: {%s}' % prop_name)
+        logging.error('existing string found, skipping: {%s}' % prop_name)
         return
 
     logging.info('migrating {%s} in {%s}' % (prop_name, prop_filename))
@@ -124,7 +124,7 @@ def migrate_string(dtd_path, prop_path, dtd_name, prop_name):
         prop_file.write('\n' + prop_line)
 
 
-# Apply the migration instructions in the provided configuration file
+# Apply the migration instructions in the provided configuration file.
 def migrate_conf(conf_path, l10n_path):
     f = open(conf_path, 'r')
     lines = f.readlines()
@@ -138,7 +138,7 @@ def migrate_conf(conf_path, l10n_path):
         if ' = ' not in line:
             continue
 
-        # Expected syntax : ${dtd_path}:${dtd_name} = ${prop_path}:${prop_name}
+        # Expected syntax: ${dtd_path}:${dtd_name} = ${prop_path}:${prop_name}.
         before, after = line.split(' = ')
         dtd_path, dtd_name = before.split(':')
         prop_path, prop_name = after.split(':')
