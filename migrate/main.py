@@ -1,5 +1,6 @@
 import argparse
 import glob
+import HTMLParser
 import logging
 import os
 import parser
@@ -26,6 +27,10 @@ CENTRAL_BASE_URL = ('https://hg.mozilla.org/'
 DEV_BASE_URL = ('https://hg.mozilla.org/'
                 'try/raw-file/eec2fac3231f12ea16689a7c7aec057032551a50/'
                 'devtools/client/locales/en-US/')
+
+
+# HTML parser to translate HTML entities in dtd files
+HTML_PARSER = HTMLParser.HTMLParser()
 
 
 # Cache to store properties files retrieved over the network.
@@ -80,7 +85,8 @@ def get_translation_from_dtd(dtd_path, entity_name):
     dtd_parser.readFile(dtd_path)
     entities, map = dtd_parser.parse()
     entity = entities[map[entity_name]]
-    return entity.val.encode('utf-8')
+    translation = HTML_PARSER.unescape(entity.val)
+    return translation.encode('utf-8')
 
 
 # Create a new properties file at the provided path.
