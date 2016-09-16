@@ -1,22 +1,22 @@
-font-inspector.dtd:showAllFonts = font-inspector.properties:fontinspector.seeAll.tooltip
-font-inspector.dtd:showAllFontsUsed = font-inspector.properties:fontinspector.seeAll
-font-inspector.dtd:usedAs = font-inspector.properties:fontinspector.usedAs
-font-inspector.dtd:system = font-inspector.properties:fontinspector.system
-font-inspector.dtd:remote = font-inspector.properties:fontinspector.remote
-font-inspector.dtd:previewHint = font-inspector.properties:fontinspector.previewText
+font-inspector.properties:fontinspector.seeAll.tooltip = font-inspector.dtd:showAllFonts
+font-inspector.properties:fontinspector.seeAll = font-inspector.dtd:showAllFontsUsed
+font-inspector.properties:fontinspector.usedAs = font-inspector.dtd:usedAs
+font-inspector.properties:fontinspector.system = font-inspector.dtd:system
+font-inspector.properties:fontinspector.remote = font-inspector.dtd:remote
+font-inspector.properties:fontinspector.previewText = font-inspector.dtd:previewHint
 
-inspector.dtd:inspectorEyeDropper.label = inspector.properties:inspector.eyedropper.label
-inspector.dtd:inspectorBreadcrumbsGroup = inspector.properties:inspector.breadcrumbs.label
+inspector.properties:inspector.eyedropper.label = inspector.dtd:inspectorEyeDropper.label
+inspector.properties:inspector.breadcrumbs.label = inspector.dtd:inspectorBreadcrumbsGroup
 
-layoutview.dtd:layoutViewTitle = layoutview.properties:layoutview.title
-layoutview.dtd:margin.tooltip = layoutview.properties:layoutview.margin
-layoutview.dtd:padding.tooltip = layoutview.properties:layoutview.padding
-layoutview.dtd:border.tooltip = layoutview.properties:layoutview.border
-layoutview.dtd:content.tooltip = layoutview.properties:layoutview.content
-layoutview.dtd:geometry.button.tooltip = layoutview.properties:layoutview.geometryButton.tooltip
+layoutview.properties:layoutview.title = layoutview.dtd:layoutViewTitle
+layoutview.properties:layoutview.margin = layoutview.dtd:margin.tooltip
+layoutview.properties:layoutview.padding = layoutview.dtd:padding.tooltip
+layoutview.properties:layoutview.border = layoutview.dtd:border.tooltip
+layoutview.properties:layoutview.content = layoutview.dtd:content.tooltip
+layoutview.properties:layoutview.geometryButton.tooltip = layoutview.dtd:geometry.button.tooltip
 
-styleinspector.dtd:browserStylesLabel = inspector.properties:inspector.browserStyles.label
-styleinspector.dtd:filterStylesPlaceholder = inspector.properties:inspector.filterStyles.placeholder
-styleinspector.dtd:addRuleButtonTooltip = inspector.properties:inspector.addRule.tooltip
-styleinspector.dtd:togglePseudoClassPanel = inspector.properties:inspector.togglePseudo.tooltip
-styleinspector.dtd:noPropertiesFound = inspector.properties:inspector.noProperties
+inspector.properties:inspector.browserStyles.label = styleinspector.dtd:browserStylesLabel
+inspector.properties:inspector.filterStyles.placeholder = styleinspector.dtd:filterStylesPlaceholder
+inspector.properties:inspector.addRule.tooltip = styleinspector.dtd:addRuleButtonTooltip
+inspector.properties:inspector.togglePseudo.tooltip = styleinspector.dtd:togglePseudoClassPanel
+inspector.properties:inspector.noProperties = styleinspector.dtd:noPropertiesFound

@@ -138,10 +138,10 @@ def migrate_conf(conf_path, l10n_path):
         if ' = ' not in line:
             continue
 
-        # Expected syntax: ${dtd_path}:${dtd_name} = ${prop_path}:${prop_name}.
-        before, after = line.split(' = ')
-        dtd_path, dtd_name = before.split(':')
-        prop_path, prop_name = after.split(':')
+        # Expected syntax: ${prop_path}:${prop_name} = ${dtd_path}:${dtd_name}.
+        prop_info, dtd_info = line.split(' = ')
+        prop_path, prop_name = prop_info.split(':')
+        dtd_path, dtd_name = dtd_info.split(':')
 
         dtd_path = os.path.join(l10n_path, dtd_path)
         prop_path = os.path.join(l10n_path, prop_path)
