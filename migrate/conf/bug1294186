@@ -8,12 +8,12 @@ font-inspector.properties:fontinspector.previewText = font-inspector.dtd:preview
 inspector.properties:inspector.eyedropper.label = inspector.dtd:inspectorEyeDropper.label
 inspector.properties:inspector.breadcrumbs.label = inspector.dtd:inspectorBreadcrumbsGroup
 
-layoutview.properties:layoutview.title = layoutview.dtd:layoutViewTitle
-layoutview.properties:layoutview.margin = layoutview.dtd:margin.tooltip
-layoutview.properties:layoutview.padding = layoutview.dtd:padding.tooltip
-layoutview.properties:layoutview.border = layoutview.dtd:border.tooltip
-layoutview.properties:layoutview.content = layoutview.dtd:content.tooltip
-layoutview.properties:layoutview.geometryButton.tooltip = layoutview.dtd:geometry.button.tooltip
+boxmodel.properties:boxmodel.title = layoutview.dtd:layoutViewTitle
+boxmodel.properties:boxmodel.margin = layoutview.dtd:margin.tooltip
+boxmodel.properties:boxmodel.padding = layoutview.dtd:padding.tooltip
+boxmodel.properties:boxmodel.border = layoutview.dtd:border.tooltip
+boxmodel.properties:boxmodel.content = layoutview.dtd:content.tooltip
+boxmodel.properties:boxmodel.geometryButton.tooltip = layoutview.dtd:geometry.button.tooltip
 
 inspector.properties:inspector.browserStyles.label = styleinspector.dtd:browserStylesLabel
 inspector.properties:inspector.filterStyles.placeholder = styleinspector.dtd:filterStylesPlaceholder
