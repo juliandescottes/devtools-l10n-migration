@@ -4,6 +4,7 @@ import HTMLParser
 import logging
 import os
 import parser
+import re
 import urllib2
 
 
@@ -46,7 +47,7 @@ def get_central_prop_file(prop_filename):
         return central_prop_cache[prop_filename]
 
     url = DEV_BASE_URL + prop_filename
-    logging.info('loading localization notes from central: {%s}' % url)
+    logging.info('loading localization files from central: {%s}' % url)
 
     try:
         central_prop_cache[prop_filename] = urllib2.urlopen(url).readlines()
@@ -119,9 +120,10 @@ def migrate_string(dtd_path, prop_path, dtd_name, prop_name):
     if prop_line in prop_file_content:
         logging.warning('string already migrated, skipping: {%s}' % prop_name)
         return
+
     # Skip the string and log an error if an existing entry is found, but with
     # a different value.
-    if ('\n' + prop_name + '=') in prop_file_content:
+    if re.search('\n' + re.escape(prop_name) + '\s*=', prop_file_content):
         logging.error('existing string found, skipping: {%s}' % prop_name)
         return
 
