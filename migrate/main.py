@@ -6,8 +6,10 @@ import os
 import parser
 import urllib2
 
+
 # Configure logging format and level
 logging.basicConfig(format='  [%(levelname)s] %(message)s', level=logging.INFO)
+
 
 # License header to use when creating new properties files.
 LICENSE = ('# This Source Code Form is subject to the terms of the '
@@ -34,25 +36,25 @@ HTML_PARSER = HTMLParser.HTMLParser()
 
 
 # Cache to store properties files retrieved over the network.
-central_properties = {}
+central_prop_cache = {}
 
 
 # Retrieve the current version of the provided properties file filename from
 # devtools/client on mozilla central.
 def get_central_prop_file(prop_filename):
-    if prop_filename in central_properties:
-        return central_properties[prop_filename]
+    if prop_filename in central_prop_cache:
+        return central_prop_cache[prop_filename]
 
     url = DEV_BASE_URL + prop_filename
     logging.info('loading localization notes from central: {%s}' % url)
 
     try:
-        central_properties[prop_filename] = urllib2.urlopen(url).readlines()
+        central_prop_cache[prop_filename] = urllib2.urlopen(url).readlines()
     except:
         logging.error('failed to load properties file on central : {%s}' % url)
-        central_properties[prop_filename] = []
+        central_prop_cache[prop_filename] = []
 
-    return central_properties[prop_filename]
+    return central_prop_cache[prop_filename]
 
 
 # Retrieve the current en-US localization notes for the provided prop_name.
